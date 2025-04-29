@@ -7,6 +7,7 @@ import { User, UserDocument } from 'src/users/schema/user.schema';
 import {
   CreateUserDto,
   UpdateUserDto,
+  UserFiltersDto,
   UserListGetQueryDto,
 } from './dto/user-request.dto';
 import { UserListResponseDto, UserResponseDto } from './dto/user-response.dto';
@@ -52,6 +53,14 @@ export class UsersService {
         totalItems: 0,
       },
     };
+  }
+
+  async findOneUser(filters: UserFiltersDto): Promise<User> {
+    const user = await this.userModel.findOne(filters).exec();
+
+    if (!user) throw new AppException(ErrorCodes.USER_NOT_FOUND);
+
+    return user;
   }
 
   async updateUser(

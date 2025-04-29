@@ -1,10 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
 
 export type UserDocument = HydratedDocument<User>;
 
 @Schema({ timestamps: true })
 export class User {
+  _id?: Types.ObjectId;
+
   @Prop({ required: true })
   firstName: string;
 
@@ -16,6 +18,9 @@ export class User {
 
   @Prop()
   phoneNumber: string;
+
+  @Prop({ required: true })
+  password: string;
 
   @Prop({ default: false })
   isActive: boolean;

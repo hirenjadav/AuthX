@@ -13,7 +13,7 @@ export class UpdateUserDto extends PartialType(
   OmitType(UserDto, ['id'] as const),
 ) {}
 
-class UserFiltersDto extends PartialType(
+export class UserFiltersDto extends PartialType(
   OmitType(UserDto, ['password'] as const),
 ) {}
 export class UserListGetQueryDto extends GetListQueryDto<UserFiltersDto> {}
