@@ -23,7 +23,7 @@ export class AuthService {
       const user = await this.usersService.findOneUser({ email: dto.email });
 
       if (user.password.toLowerCase() != dto.password.toLowerCase()) {
-        throw new AppException(ErrorCodes.INVALID_CREDENTIALS);
+        throw new AppException(ErrorCodes.INVALID_USER_CREDENTIALS);
       }
 
       const payload = { id: user._id, email: user.email };
@@ -37,9 +37,9 @@ export class AuthService {
         if (
           error &&
           (error['code'] === ErrorCodes.USER_NOT_FOUND ||
-            error['code'] === ErrorCodes.INVALID_CREDENTIALS)
+            error['code'] === ErrorCodes.INVALID_USER_CREDENTIALS)
         ) {
-          throw new AppException(ErrorCodes.INVALID_CREDENTIALS);
+          throw new AppException(ErrorCodes.INVALID_USER_CREDENTIALS);
         }
 
         throw e; // Re-throw if it's an AppException but not USER_NOT_FOUND

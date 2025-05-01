@@ -1,6 +1,6 @@
 import { ErrorCodes } from './../common/constants/error-codes.constant';
 import { AppException } from './../common/exceptions/app.exception';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, SortOrder } from 'mongoose';
 import { User, UserDocument } from 'src/users/schema/user.schema';
@@ -77,7 +77,7 @@ export class UsersService {
   }
 
   async deleteUser(id: string): Promise<boolean> {
-    if (!id) throw new BadRequestException();
+    if (!id) throw new AppException(ErrorCodes.BAD_REQUEST);
 
     const deletedUser = await this.userModel.findByIdAndDelete(id).exec();
 

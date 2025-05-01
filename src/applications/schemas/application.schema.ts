@@ -1,10 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import { HydratedDocument, Types } from 'mongoose';
 
 export type ApplicationDocument = HydratedDocument<Application>;
 
 @Schema({ timestamps: true })
 export class Application {
+  _id?: Types.ObjectId;
+
   @Prop({ required: true })
   name: string;
 
@@ -12,7 +14,13 @@ export class Application {
   email: string;
 
   @Prop()
-  phoneNumber: string;
+  phoneNumber: number;
+
+  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
+  createBy: Types.ObjectId;
+
+  @Prop({ type: Types.ObjectId, ref: 'User', required: true })
+  owner: Types.ObjectId;
 }
 
 export const ApplicationSchema = SchemaFactory.createForClass(Application);
