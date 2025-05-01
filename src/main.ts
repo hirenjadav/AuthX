@@ -1,12 +1,24 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { setupSwagger } from './configs/swagger.config';
+import { ConfigService } from '@nestjs/config';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  if (process.env.NODE_ENV !== 'production') setupSwagger(app);
+  const configService = app.get(ConfigService);
 
-  await app.listen(process.env.PORT ?? 5000);
+  const currentEnvironment = configService.get<string>(
+    'NODE_ENV',
+    'development',
+  );
+  const port = configService.get<number>('PORT', 3000);
+
+  if (currentEnvironment !== 'production') {
+    setupSwagger(app);
+  }
+
+  console.log(`Running in ${currentEnvironment} mode on port ${port}`);
+  await app.listen(port);
 }
 bootstrap();
