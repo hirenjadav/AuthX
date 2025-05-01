@@ -6,11 +6,11 @@ import { ApplicationsModule } from './applications/applications.module';
 import { RolesModule } from './roles/roles.module';
 import { PermissionsModule } from './permissions/permissions.module';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
-import { TransformResponseInterceptor } from './common/interceptors/transform-response.interceptor';
 import { AuthModule } from './auth/auth.module';
 import { DatabaseModule } from './database/database.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthGuard } from './auth/auth.guard';
+import { ResponseFormatInterceptor } from './common/interceptors/response-format.interceptor';
 
 @Module({
   imports: [
@@ -29,7 +29,7 @@ import { AuthGuard } from './auth/auth.guard';
     AppService,
     {
       provide: APP_INTERCEPTOR,
-      useClass: TransformResponseInterceptor,
+      useClass: ResponseFormatInterceptor,
     },
     {
       provide: APP_GUARD,

@@ -2,12 +2,14 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { setupSwagger } from './configs/swagger.config';
 import { ConfigService } from '@nestjs/config';
+import { AppExceptionFilter } from './common/filters/app-exception.filter';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  const configService = app.get(ConfigService);
+  app.useGlobalFilters(new AppExceptionFilter());
 
+  const configService = app.get(ConfigService);
   const currentEnvironment = configService.get<string>(
     'NODE_ENV',
     'development',
