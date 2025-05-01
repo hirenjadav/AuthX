@@ -6,6 +6,8 @@ export const ErrorMessages: Record<ErrorCodes, string> = {
   [ErrorCodes.UNAUTHORIZED]: 'Unauthorized access.',
   [ErrorCodes.INTERNAL_SERVER_ERROR]: 'Something went wrong.',
 
+  [ErrorCodes.ENTITY_NOT_FOUND]: 'Entity not found.',
+
   [ErrorCodes.USER_NOT_FOUND]: 'User not found.',
   [ErrorCodes.USER_EMAIL_ALREADY_EXISTS]: 'Email already exists.',
   [ErrorCodes.INVALID_USER_CREDENTIALS]: 'Invalid credentials provided.',
