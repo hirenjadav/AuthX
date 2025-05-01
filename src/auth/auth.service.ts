@@ -26,7 +26,7 @@ export class AuthService {
         throw new AppException(ErrorCodes.INVALID_CREDENTIALS);
       }
 
-      const payload = { sub: user._id, email: user.email };
+      const payload = { id: user._id, email: user.email };
       return {
         accessToken: await this.jwtService.signAsync(payload),
       };
