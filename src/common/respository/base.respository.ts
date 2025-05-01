@@ -30,12 +30,12 @@ export class BaseRepository<T> {
     search: string = '',
     filters: FilterQuery<T> = {},
     pagination?: {
-      page: number;
-      limit: number;
+      page?: number;
+      limit?: number;
     },
     sorting?: {
-      sortBy: string;
-      sortOrder: SortOrder;
+      sortBy?: string;
+      sortOrder?: SortOrder;
     },
   ): Promise<{
     items: T[];
@@ -49,10 +49,10 @@ export class BaseRepository<T> {
     const limit = pagination?.limit || 10;
     const skip = (page - 1) * limit;
 
-    let sortOptions: Record<string, SortOrder> | undefined = undefined;
-    if (sorting?.sortBy) {
+    let sortOptions: Record<string, SortOrder> | undefined;
+    if (sorting?.sortBy && sorting?.sortOrder) {
       sortOptions = {
-        [sorting.sortBy]: sorting.sortOrder,
+        [sorting.sortBy]: sorting.sortOrder === 'desc' ? -1 : 1,
       };
     }
 
