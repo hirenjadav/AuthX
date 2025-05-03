@@ -3,6 +3,7 @@ import { ApplicationsController } from './applications.controller';
 import { ApplicationsService } from './applications.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Application, ApplicationSchema } from './schemas/application.schema';
+import { ApplicationsRepository } from './applications.repository';
 
 @Module({
   imports: [
@@ -11,6 +12,6 @@ import { Application, ApplicationSchema } from './schemas/application.schema';
     ]),
   ],
   controllers: [ApplicationsController],
-  providers: [ApplicationsService],
+  providers: [ApplicationsService, ApplicationsRepository],
 })
 export class ApplicationsModule {}
