@@ -37,6 +37,7 @@ export class AuthService {
         if (
           error &&
           (error['code'] === ErrorCodes.USER_NOT_FOUND ||
+            error['code'] === ErrorCodes.ENTITY_NOT_FOUND ||
             error['code'] === ErrorCodes.INVALID_USER_CREDENTIALS)
         ) {
           throw new AppException(ErrorCodes.INVALID_USER_CREDENTIALS);
