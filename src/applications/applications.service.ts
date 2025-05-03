@@ -76,7 +76,7 @@ export class ApplicationsService {
       name: data.name,
       email: data.email,
       phoneNumber: data.phoneNumber,
-      createBy: data.createBy.toString(),
+      createdBy: data.createdBy.toString(),
       owner: data.owner.toString(),
     };
   }

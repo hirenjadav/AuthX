@@ -17,7 +17,7 @@ export class Application {
   phoneNumber: number;
 
   @Prop({ type: Types.ObjectId, ref: 'User', required: true })
-  createBy: Types.ObjectId;
+  createdBy: Types.ObjectId;
 
   @Prop({ type: Types.ObjectId, ref: 'User', required: true })
   owner: Types.ObjectId;

@@ -9,7 +9,7 @@ export class CreateApplicationDto extends PickType(ApplicationDto, [
 ]) {}
 
 export class UpdateApplicationDto extends PartialType(
-  OmitType(ApplicationDto, ['id', 'createBy'] as const),
+  OmitType(ApplicationDto, ['id', 'createdBy'] as const),
 ) {}
 
 export class ApplicationFiltersDto extends PartialType(ApplicationDto) {}

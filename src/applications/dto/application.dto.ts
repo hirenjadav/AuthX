@@ -1,33 +1,46 @@
+import { PHONE_NUMBER_LENGTH } from './../../common/constants/validations.constant';
 import { ApiProperty } from '@nestjs/swagger';
 import { Transform } from 'class-transformer';
-import { IsEmail, IsNumberString, IsString } from 'class-validator';
+import {
+  IsEmail,
+  IsNumberString,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
 
 export class ApplicationDto {
   @ApiProperty()
   id: string;
 
   @ApiProperty()
-  @IsString()
+  @IsString({ message: 'Name should be string.' })
   @Transform(({ value }: { value: string }) => value.trim())
   name: string;
 
-  @IsString()
-  @IsEmail()
-  @Transform(({ value }: { value: string }) => value.trim())
   @ApiProperty()
+  @IsString({ message: 'Email should be string.' })
+  @IsEmail({}, { message: 'Invalid email format.' })
+  @Transform(({ value }: { value: string }) => value.trim())
   email: string;
 
   @ApiProperty()
-  @IsNumberString()
+  @IsNumberString({}, { message: 'Phone number should be number string.' })
+  @MinLength(PHONE_NUMBER_LENGTH, {
+    message: 'Minimum length of phone number should be 10',
+  })
+  @MaxLength(PHONE_NUMBER_LENGTH, {
+    message: 'Maximum length of phone number should be 10',
+  })
   phoneNumber: number;
 
   @ApiProperty()
-  @IsString()
+  @IsString({ message: 'Createdby ID should be string.' })
   @Transform(({ value }: { value: string }) => value.trim())
-  createBy: string;
+  createdBy: string;
 
   @ApiProperty()
-  @IsString()
+  @IsString({ message: 'Owner ID should be string.' })
   @Transform(({ value }: { value: string }) => value.trim())
   owner: string;
 }

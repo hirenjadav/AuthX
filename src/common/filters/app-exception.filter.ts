@@ -38,6 +38,8 @@ export class AppExceptionFilter<T> implements ExceptionFilter {
       } else if (typeof exResponse === 'string') {
         errorResponse.error!.message = exResponse;
       }
+    } else {
+      console.error('\n\n\n', exception, '\n\n\n');
     }
 
     const ctx = host.switchToHttp();
