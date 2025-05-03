@@ -7,12 +7,12 @@ export class RoleDto {
   id: string;
 
   @ApiProperty()
-  @IsString()
+  @IsString({ message: 'Name should be string.' })
   @Transform(({ value }: { value: string }) => value.trim())
   name: string;
 
   @ApiProperty()
-  @IsString()
+  @IsString({ message: 'Description should be string.' })
   @Transform(({ value }: { value: string }) => value.trim())
   description: string;
 }
